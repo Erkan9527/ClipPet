@@ -74,7 +74,7 @@ python scripts/03_animation_tuner.py frames_matted --output frames_tuned --gif o
 ## 奶娃示范
 
 <p align="center">
-  <img src="demo.gif" width="320" alt="奶娃待机动画 — ClipPet 产物"/>
+  <img src="https://raw.githubusercontent.com/Erkan9527/ClipPet/main/demo.gif" width="320" alt="奶娃待机动画 — ClipPet 产物"/>
 </p>
 
 拿 **奶娃捧腹大笑原版视频**（14.8 秒，480×552）跑一遍，结果：
