@@ -7,6 +7,58 @@
 
 ---
 
+## 📥 安装到 AI Agent
+
+ClipPet 可以作为 AI Agent Skill 安装到各种 AI 编程工具中，安装后用户提到"抠图""去背景""透明动画""视频转帧"等关键词时会自动触发。
+
+> 本 skill 由 AI Agent 按需调用，不需要每次手动加载。
+
+### OpenCode / Cursor / Windsurf
+
+```bash
+# 方式一：克隆到项目本地（推荐，随项目携带，团队共享）
+cd your-project
+git clone https://github.com/Erkan9527/ClipPet.git .agents/skills/ClipPet
+
+# 方式二：安装到全局技能目录（所有项目可用，推荐个人使用）
+git clone https://github.com/Erkan9527/ClipPet.git ~/.config/opencode/skills/ClipPet
+```
+
+**注册技能**：在项目根目录创建或编辑 `opencode.json`（或 `opencode.jsonc`）：
+
+```json
+{
+  "skills": {
+    "ClipPet": {
+      "description": "视频转透明背景精灵帧动画 — 抽帧→AI抠图→锚定对齐→GIF导出"
+    }
+  }
+}
+```
+
+### Claude Code
+
+```bash
+# 克隆到 Claude Code 技能目录
+git clone https://github.com/Erkan9527/ClipPet.git ~/.claude/skills/ClipPet
+```
+
+Claude Code 会自动加载 `~/.claude/skills/` 下的所有技能配置，无需额外注册。
+
+### 手动使用（不依赖 AI Agent）
+
+```bash
+# 1. 安装依赖
+pip install pillow numpy torch torchvision transformers huggingface_hub
+
+# 2. 三步处理
+python scripts/01_extract_frames.py input.mp4 --fps 10 --output frames_raw
+python scripts/02_birefnet_matting.py frames_raw --output frames_matted
+python scripts/03_animation_tuner.py frames_matted --output frames_tuned --gif output.gif
+```
+
+---
+
 ## 这是什么
 
 把一段视频变成**透明背景的逐帧动画**。不需要绿幕，不需要手动抠图，三步全自动：
@@ -19,23 +71,23 @@
 
 ---
 
-## 奶龙示范
+## 奶娃示范
 
 <p align="center">
-  <img src="demo.gif" width="320" alt="奶龙待机动画 — video2sprite 产物"/>
+  <img src="demo.gif" width="320" alt="奶娃待机动画 — ClipPet 产物"/>
 </p>
 
-拿 **奶龙捧腹大笑原版视频**（14.8 秒，480×552）跑一遍，结果：
+拿 **奶娃捧腹大笑原版视频**（14.8 秒，480×552）跑一遍，结果：
 
 | 环节 | 数量 | 说明 |
 |------|------|------|
-| 原视频 | 1 个 MP4 | 奶龙站在普通背景前大笑，身体在晃 |
+| 原视频 | 1 个 MP4 | 奶娃站在普通背景前大笑，身体在晃 |
 | ① 抽帧（10fps） | 148 张 JPG | 每秒拆 10 帧 |
-| ② AI 抠图 | 148 张透明 PNG | 奶龙被完整抠出，背景全透明 |
-| ③ 居中锚定 | 44 帧对齐 PNG | 每帧奶龙自动居中，抖动消除 |
-| 最终 GIF | 1 个透明 GIF | 可直接用的大笑奶龙动图 |
+| ② AI 抠图 | 148 张透明 PNG | 奶娃被完整抠出，背景全透明 |
+| ③ 居中锚定 | 44 帧对齐 PNG | 每帧奶娃自动居中，抖动消除 |
+| 最终 GIF | 1 个透明 GIF | 可直接用的大笑奶娃动图 |
 
-**关键细节**：原始视频里奶龙大笑时身体上下颠，第③步的锚定算法自动把每一帧的奶龙中心对齐到画布中心，出来的 GIF 是稳稳当当的，不会跳来跳去。
+**关键细节**：原始视频里奶娃大笑时身体上下颠，第③步的锚定算法自动把每一帧的奶娃中心对齐到画布中心，出来的 GIF 是稳稳当当的，不会跳来跳去。
 
 ---
 

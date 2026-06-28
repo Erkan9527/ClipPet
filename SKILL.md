@@ -23,6 +23,43 @@ python scripts/01_extract_frames.py --help       # ffmpeg 自动检测
 python scripts/02_birefnet_matting.py --no-check  # 跳过依赖预检
 ```
 
+## 安装到 AI 编程工具
+
+ClipPet 安装后，用户提到"抠图""去背景""透明动画""视频转帧""精灵帧"等关键词时会**自动触发**。
+
+### OpenCode / Cursor / Windsurf
+
+```bash
+# 全局安装（所有项目可用）
+git clone https://github.com/Erkan9527/ClipPet.git ~/.config/opencode/skills/ClipPet
+
+# 或在项目中注册（推荐 .opencode.json）
+# {
+#   "skills": {
+#     "ClipPet": {
+#       "description": "视频转透明背景精灵帧动画"
+#     }
+#   }
+# }
+```
+
+### Claude Code
+
+```bash
+# 克隆到技能目录，自动加载
+git clone https://github.com/Erkan9527/ClipPet.git ~/.claude/skills/ClipPet
+```
+
+### 其他 AI 工具
+
+大多数 AI 编程工具支持将项目克隆到其技能/agents 目录下，或通过项目本地 `.agents/skills/` 目录加载：
+
+```bash
+git clone https://github.com/Erkan9527/ClipPet.git .agents/skills/ClipPet
+```
+
+## 依赖
+
 **各阶段依赖速查表：**
 
 | 阶段 | 脚本 | 硬依赖 | 可选 |
